@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camera_follow : MonoBehaviour
+public class Camera_follow : MonoBehaviour
 {
     private GameObject cam;
     private GameObject player;
