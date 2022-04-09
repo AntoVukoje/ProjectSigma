@@ -13,6 +13,7 @@ public class Combat : MonoBehaviour
 
     public float cooldown = 0.3f;
     public float animationDuration = 0.1f;
+    public float dmg = 50f;
 
     private void Start()
     {
@@ -41,6 +42,4 @@ public class Combat : MonoBehaviour
         yield return new WaitForSeconds(animationDuration);
         Destroy(attackRangeCopy);
     }
-
-    
 }
