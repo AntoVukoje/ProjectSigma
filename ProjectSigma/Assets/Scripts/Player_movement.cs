@@ -5,8 +5,12 @@ using UnityEngine;
 public class Player_movement : MonoBehaviour
 {
     public float speed = 5f;
+    public float dashDistance = 15f;
+    public float dashCooldown = 0.5f;
 
     private GameObject player_body;
+
+    private bool canDash = true;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +29,7 @@ public class Player_movement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(Vector3.right *speed * Time.deltaTime);
+            transform.Translate(Vector3.right * speed * Time.deltaTime);
             player_body.transform.eulerAngles = new Vector3(0, 45, 0);
         }
         if (Input.GetKey(KeyCode.W))
@@ -55,6 +59,20 @@ public class Player_movement : MonoBehaviour
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.W))
         {
             player_body.transform.eulerAngles = new Vector3(0, 270, 0);
+        }
+
+        //DASHING
+        if (Input.GetKey(KeyCode.LeftShift) && canDash)
+        {
+            canDash = false;
+            transform.position += player_body.transform.right * dashDistance;
+            StartCoroutine(dashReset());
+        }
+
+        IEnumerator dashReset()
+        {
+            yield return new WaitForSeconds(dashCooldown);
+            canDash = true;
         }
     }
 }
